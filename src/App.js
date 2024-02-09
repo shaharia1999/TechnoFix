@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+
+
+import {  Route, Routes } from 'react-router-dom';
+import Home from './component/Home/Home';
+import { createContext, useEffect, useState } from 'react';
+import axios from 'axios';
+export const UserContext = createContext();
 
 function App() {
+  const [user,setUser]=useState(null)
+  useEffect(()=>{
+    axios.get('https://dummyjson.com/users')
+    .then(function (response) {
+      // handle success
+      setUser(response?.data.users
+        );
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+  },[])
+ 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <UserContext.Provider value={user}>
+      <Routes>
+    <Route path='/' element={<Home/>}></Route>
+    {/* <Route path='/room/:roomId' element={<RoomPage/>}></Route> */}
+ 
+   </Routes>
+   </UserContext.Provider>
     </div>
   );
 }
