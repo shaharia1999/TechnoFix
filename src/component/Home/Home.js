@@ -8,8 +8,9 @@ import '../../App.css'
 const Home = () => {
   const user = useContext(UserContext);
   const [search, setSearch] = useState('')
-  const [sortdata, setSort] = useState([]);
+  const [sortdata, setSort] = useState(null);
   const [sortupdate, setSortUpdate] = useState(false)
+  console.log(sortdata);
 
   useEffect(() => {
     if (user) {
@@ -91,7 +92,7 @@ const Home = () => {
         {
           user? <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-x-5 gap-y-20 mt-20 mb-6">
           {
-            sortdata && sortdata.map((item, index) => {
+            sortdata&& sortdata.length>0&& sortdata.map((item, index) => {
               return (
                 <div className="  shadow-lg rounded-lg px-5" key={index} >
                   <div className="flex justify-center ">
@@ -126,12 +127,15 @@ const Home = () => {
               )
             })
           }
-
         </div>:  <div className='w-full mt-20 flex justify-center items-center'>
           <h1 className='text-3xl font-bold text-yellow-500'>Loading Data...</h1>
         </div>
         }
-       
+       {
+            sortdata&& sortdata.length===0&&
+            <p className='text-2xl mt-20  text-black text-center w-full'>No Data Found</p>
+          }
+
       
       </div>
     </div>
