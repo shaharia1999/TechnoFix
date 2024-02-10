@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../App';
 import { Link } from 'react-router-dom';
 import AddUser from '../AddUser';
+import '../../App.css'
 
 
 const Home = () => {
@@ -87,7 +88,8 @@ const Home = () => {
             <AddUser />
           </div>
         </div>
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-x-5 gap-y-20 mt-20 mb-6">
+        {
+          user? <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-x-5 gap-y-20 mt-20 mb-6">
           {
             sortdata && sortdata.map((item, index) => {
               return (
@@ -125,7 +127,12 @@ const Home = () => {
             })
           }
 
+        </div>:  <div className='w-full mt-20 flex justify-center items-center'>
+          <h1 className='text-3xl font-bold text-yellow-500'>Loading Data...</h1>
         </div>
+        }
+       
+      
       </div>
     </div>
   );
