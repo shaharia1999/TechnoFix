@@ -4,6 +4,7 @@ import {  Route, Routes } from 'react-router-dom';
 import Home from './component/Home/Home';
 import { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import Slug from './component/Home/Slug';
 export const UserContext = createContext();
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
       <UserContext.Provider value={user}>
       <Routes>
     <Route path='/' element={<Home/>}></Route>
-    {/* <Route path='/room/:roomId' element={<RoomPage/>}></Route> */}
+    <Route path='/:id' element={<Slug/>}></Route>
  
    </Routes>
    </UserContext.Provider>
